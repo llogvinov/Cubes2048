@@ -4,67 +4,66 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed;
-    [SerializeField] private float pushForce;
-    [SerializeField] private float cubeMaxPosX;
+    [SerializeField] private float _moveSpeed;
+    [SerializeField] private float _pushForce;
+    [SerializeField] private float _cubeMaxPosX;
 
     [Space]
-    [SerializeField] private TouchSlider touchSlider;
+    [SerializeField] private TouchSlider _touchSlider;
 
-    private Cube mainCube;
+    private Cube _mainCube;
 
-    private bool canMove;
-    private bool isPointerDown;
-    private Vector3 cubePos;
+    private bool _canMove;
+    private bool _isPointerDown;
+    private Vector3 _cubePos;
 
     private void Start()
     {
-        canMove = true;
+        _canMove = true;
 
-        //spawn new cube
         SpawnCube();
 
         //listen to slider event
-        touchSlider.OnPointerDownEvent += OnPointerDown;
-        touchSlider.OnPointerDragEvent += OnPointerDrag;
-        touchSlider.OnPointerUpEvent += OnPointerUp;
+        _touchSlider.OnPointerDownEvent += OnPointerDown;
+        _touchSlider.OnPointerDragEvent += OnPointerDrag;
+        _touchSlider.OnPointerUpEvent += OnPointerUp;
     }
 
     private void Update()
     {
-        if (isPointerDown)
+        if (_isPointerDown)
         {
-            mainCube.transform.position = Vector3.Lerp(
-                mainCube.transform.position, 
-                cubePos, 
-                moveSpeed * Time.deltaTime
+            _mainCube.transform.position = Vector3.Lerp(
+                _mainCube.transform.position, 
+                _cubePos, 
+                _moveSpeed * Time.deltaTime
             );
         }
     }
 
     private void OnPointerDown()
     {
-        isPointerDown = true;
+        _isPointerDown = true;
     }
 
     private void OnPointerDrag(float xMovement)
     {
-        if (isPointerDown)
+        if (_isPointerDown)
         {
-            cubePos = mainCube.transform.position;
-            cubePos.x = xMovement * cubeMaxPosX;
+            _cubePos = _mainCube.transform.position;
+            _cubePos.x = xMovement * _cubeMaxPosX;
         }
     }
 
     private void OnPointerUp()
     {
-        if (isPointerDown && canMove)
+        if (_isPointerDown && _canMove)
         {
-            isPointerDown = false;
-            canMove = false;
+            _isPointerDown = false;
+            _canMove = false;
 
             //push the cube
-            mainCube.cubeRigidbody.AddForce(Vector3.forward * pushForce, ForceMode.Impulse);
+            _mainCube.cubeRigidbody.AddForce(Vector3.forward * _pushForce, ForceMode.Impulse);
 
             //spawn a new Cube after some time
             Invoke("SpawnNewCube", 0.3f);
@@ -73,29 +72,26 @@ public class Player : MonoBehaviour
 
     private void SpawnNewCube()
     {
-        mainCube.isMainCube = false;
-        canMove = true;
+        _mainCube.isMainCube = false;
+        _canMove = true;
         SpawnCube();
     }
 
     private void SpawnCube()
     {
-        mainCube = CubeSpawner.Instance.SpawnRandom();
-        mainCube.isMainCube = true;
+        _mainCube = CubeSpawner.Instance.SpawnRandom();
+        _mainCube.isMainCube = true;
 
-        //reset cubePos variable
-        cubePos = mainCube.transform.position;
+        //reset _cubePos variable
+        _cubePos = _mainCube.transform.position;
     }
 
     private void OnDestroy()
     {
         //remove listeners
-        touchSlider.OnPointerDownEvent -= OnPointerDown;
-        touchSlider.OnPointerDragEvent -= OnPointerDrag;
-        touchSlider.OnPointerUpEvent -= OnPointerUp;
+        _touchSlider.OnPointerDownEvent -= OnPointerDown;
+        _touchSlider.OnPointerDragEvent -= OnPointerDrag;
+        _touchSlider.OnPointerUpEvent -= OnPointerUp;
     }
-
-
-
 
 }

@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb2a9cd703b84124a8dfe7319db43b4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numbersText:
+  _numbersText:
   - {fileID: 6819231990026639464}
   - {fileID: 6819231988523587317}
   - {fileID: 6819231988158244345}
@@ -140,10 +140,10 @@ MonoBehaviour:
   - {fileID: 6819231988634307767}
   - {fileID: 6819231988145009857}
   cubeID: 0
-  cubeColor: {r: 0, g: 0, b: 0, a: 0}
   cubeNumber: 0
-  cubeRigidbody: {fileID: 0}
   isMainCube: 0
+  cubeRigidbody: {fileID: 0}
+  cubeColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &2392404780646036759
 MonoBehaviour:
   m_ObjectHideFlags: 0

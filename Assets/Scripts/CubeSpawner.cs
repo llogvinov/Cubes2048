@@ -6,32 +6,32 @@ public class CubeSpawner : MonoBehaviour
     //singleton class
     public static CubeSpawner Instance;
 
-    Queue<Cube> cubesQueue = new Queue<Cube>();
-    [SerializeField] private int cubesQueueCapacity = 20;
-    [SerializeField] private bool autoQueueGrow = true;
+    Queue<Cube> _cubesQueue = new Queue<Cube>();
+    [SerializeField] private int _cubesQueueCapacity = 20;
+    [SerializeField] private bool _autoQueueGrow = true;
 
-    [SerializeField] private Cube cubePrefab;
-    [SerializeField] private Color[] cubeColors;
+    [SerializeField] private Cube _cubePrefab;
+    [SerializeField] private Color[] _cubeColors;
 
+    private static int _maxPower = 12;
+    
     [HideInInspector] public int maxCubeNumber; //2^12 = 4096
 
-    private int maxPower = 12;
-    
-    private Vector3 defaultSpawnPosition;
+    private Vector3 _defaultSpawnPosition;
 
     private void Awake()
     {
         Instance = this;
 
-        defaultSpawnPosition = transform.position;
-        maxCubeNumber = (int)Mathf.Pow(2, maxPower);
+        _defaultSpawnPosition = transform.position;
+        maxCubeNumber = (int)Mathf.Pow(2, _maxPower);
 
         InitializeCubesQueue();
     }
 
     private void InitializeCubesQueue()
     {
-        for (int i = 0; i < cubesQueueCapacity; i++)
+        for (int i = 0; i < _cubesQueueCapacity; i++)
         {
             AddCubeToQueue();
         }
@@ -39,20 +39,20 @@ public class CubeSpawner : MonoBehaviour
 
     private void AddCubeToQueue()
     {
-        Cube cube = Instantiate(cubePrefab, defaultSpawnPosition, Quaternion.identity, transform).GetComponent<Cube>();
+        Cube cube = Instantiate(_cubePrefab, _defaultSpawnPosition, Quaternion.identity, transform).GetComponent<Cube>();
 
         cube.gameObject.SetActive(false);
         cube.isMainCube = false;
-        cubesQueue.Enqueue(cube);
+        _cubesQueue.Enqueue(cube);
     }
 
     public Cube Spawn(int number, Vector3 position)
     {
-        if (cubesQueue.Count == 0)
+        if (_cubesQueue.Count == 0)
         {
-            if (autoQueueGrow)
+            if (_autoQueueGrow)
             {
-                cubesQueueCapacity++;
+                _cubesQueueCapacity++;
                 AddCubeToQueue();
             }
             else
@@ -62,7 +62,7 @@ public class CubeSpawner : MonoBehaviour
             }
         }
 
-        Cube cube = cubesQueue.Dequeue();
+        Cube cube = _cubesQueue.Dequeue();
         cube.transform.position = position;
         cube.SetNumber(number);
         cube.SetColor(GetColor(number));
@@ -72,7 +72,7 @@ public class CubeSpawner : MonoBehaviour
 
     public Cube SpawnRandom()
     {
-        return Spawn(GenerateRandomNumber(), defaultSpawnPosition);
+        return Spawn(GenerateRandomNumber(), _defaultSpawnPosition);
     }
 
     public void DestroyCube(Cube cube)
@@ -82,7 +82,7 @@ public class CubeSpawner : MonoBehaviour
         cube.transform.rotation = Quaternion.identity;
         cube.isMainCube = false;
         cube.gameObject.SetActive(false);
-        cubesQueue.Enqueue(cube);
+        _cubesQueue.Enqueue(cube);
     }
 
     public int GenerateRandomNumber()
@@ -92,7 +92,7 @@ public class CubeSpawner : MonoBehaviour
 
     private Color GetColor(int number)
     {
-        return cubeColors[(int)(Mathf.Log(number) / Mathf.Log(2)) - 1];
+        return _cubeColors[(int)(Mathf.Log(number) / Mathf.Log(2)) - 1];
     }
 
 

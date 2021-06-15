@@ -233,10 +233,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1c627733ee26d0458ff8e7edaec8c95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 16
-  pushForce: 25
-  cubeMaxPosX: 1.54
-  touchSlider: {fileID: 397609035}
+  _moveSpeed: 16
+  _pushForce: 20
+  _cubeMaxPosX: 1.54
+  _touchSlider: {fileID: 397609035}
 --- !u!1 &233172960
 GameObject:
   m_ObjectHideFlags: 0
@@ -670,20 +670,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e7ec9af7bd98e244b6997f6bfb6d889, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cubesQueueCapacity: 20
-  autoQueueGrow: 1
-  cubePrefab: {fileID: 2947367193978919921, guid: b6878721b76622342997c9f269eb271c, type: 3}
-  cubeColors:
+  _cubesQueueCapacity: 20
+  _autoQueueGrow: 1
+  _cubePrefab: {fileID: 2947367193978919921, guid: b6878721b76622342997c9f269eb271c, type: 3}
+  _cubeColors:
   - {r: 1, g: 0, b: 0, a: 1}
-  - {r: 1, g: 0.23498212, b: 0, a: 1}
-  - {r: 1, g: 0.8564266, b: 0, a: 1}
-  - {r: 0.04431629, g: 1, b: 0, a: 1}
-  - {r: 0, g: 0.989897, b: 1, a: 1}
-  - {r: 0, g: 0.26012278, b: 1, a: 1}
-  - {r: 0.38114738, g: 0, b: 1, a: 1}
-  - {r: 0.8867924, g: 0.3722855, b: 0.8610611, a: 1}
-  - {r: 0.38470095, g: 0.8962264, b: 0.67781174, a: 1}
-  - {r: 0.2735849, g: 0.14967896, b: 0.089044146, a: 1}
+  - {r: 1, g: 0.31764707, b: 0, a: 1}
+  - {r: 1, g: 0.9397521, b: 0, a: 1}
+  - {r: 0.17054713, g: 1, b: 0, a: 1}
+  - {r: 0, g: 0.697165, b: 1, a: 1}
+  - {r: 0, g: 0.16215563, b: 1, a: 1}
+  - {r: 0.41301203, g: 0, b: 1, a: 1}
+  - {r: 1, g: 0, b: 0.8467264, a: 1}
+  - {r: 0.4138483, g: 0.9433962, b: 0.7728261, a: 1}
+  - {r: 0.7952491, g: 1, b: 0.28773582, a: 1}
+  - {r: 0.3962264, g: 0.17677793, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
   maxCubeNumber: 0
 --- !u!1 &963194225

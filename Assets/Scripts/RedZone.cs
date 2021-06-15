@@ -16,8 +16,4 @@ public class RedZone : MonoBehaviour
         }
     }
 
-
-
-
-
 }
