@@ -13,10 +13,10 @@ public class CubeSpawner : MonoBehaviour
     [SerializeField] private Cube _cubePrefab;
     [SerializeField] private Color[] _cubeColors;
 
-    private static int _maxPower = 12;
-    
     [HideInInspector] public int maxCubeNumber; //2^12 = 4096
 
+    private static int _maxPower = 12;
+    
     private Vector3 _defaultSpawnPosition;
 
     private void Awake()
@@ -94,6 +94,5 @@ public class CubeSpawner : MonoBehaviour
     {
         return _cubeColors[(int)(Mathf.Log(number) / Mathf.Log(2)) - 1];
     }
-
 
 }

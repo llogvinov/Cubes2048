@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class CubeCollision : MonoBehaviour
 {
-    private Cube _cube;
-
     private float _pushForce = 2.5f;
     private float _overlapRadius = 2f;
     private float _explosionForce = 400f;
     private float _explosionRadius = 1.5f;
+    
+    private Cube _cube;
 
     private void Awake()
     {
@@ -58,9 +58,5 @@ public class CubeCollision : MonoBehaviour
             }
         }
     }
-
-
-
-
 
 }

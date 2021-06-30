@@ -10,9 +10,9 @@ public class SceneController : MonoBehaviour
     {
         _currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
 
-        if (++_currentSceneIndex < SceneManager.sceneCountInBuildSettings)
+        if (_currentSceneIndex + 1 < SceneManager.sceneCountInBuildSettings)
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(++_currentSceneIndex);
         }
     }
 
